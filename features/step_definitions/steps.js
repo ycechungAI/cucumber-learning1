@@ -4,14 +4,11 @@ const { assertThat, is } = require('hamjest')
 const { Person, Network } = require("../../src/shouty");
 
 Before(function () {
-  this.network = new Network()
-})
-Given('a person named Lucy', function () {
-  this.lucy = new Person(this.network)
+  this.network = new Network();
+  this.people = {};
 });
-
-Given("a person named Sean", function () {
-  this.sean = new Person(this.network);
+Given("a person named {word}", function (name) {
+  this.people[name] = new Person(this.network);
 });
 
 /*
@@ -22,14 +19,13 @@ Given("Lucy is {int} metres from Sean", function (distance) {
 
   this.lucy.moveTo(distance)
 });
-*/     
-When('Sean shout(s) {string}', function (message) {
-  sean = new Person(this.network)
-  sean.shout(message)
-  this.messageFromSean = message
+*/
+When("Sean shout(s) {string}", function (message) {
+  this.people["Sean"].shout(message);
+  this.messageFromSean = message;
 });
-           
-Then('Lucy should hear Sean\'s message', function () {
+
+Then("Lucy should hear Sean's message", function () {
   // Write code here that turns the phrase above into concrete actions
-  assertThat(this.lucy.messagesHeard(), is([this.messageFromSean]))
+  assertThat(this.people["Lucy"].messagesHeard(), is([this.messageFromSean]));
 });
