@@ -1,5 +1,5 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber')
-const { assertThat, is } = require('hamjest')
+const { assertThat, is } = require("hamjest");
 
 const { Person, Network } = require("../../src/shouty");
 
@@ -53,4 +53,9 @@ Then("Lucy should hear Sean's message", function () {
 Then("Larry should not hear Sean's message", function () {
   // Write code here that turns the phrase above into concrete actions
   assertThat(this.people["Larry"].messagesHeard(), is([this.messageFromSean]));
+});
+
+Then("Lucy hears the following messages:", function (expectedMessages) {
+  let actualMessages = this.people["Lucy"].messagesHeard().map((m) => [m]);
+  assertThat(actualMessages, expectedMessages.raw());
 });

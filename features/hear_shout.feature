@@ -34,3 +34,14 @@ Feature: Hear shout
         | Larry | 150.     |
       When Sean shouts
       Then Larry should not hear Sean's message
+    
+    Rule: Listener should be able to hear multiple shouts
+
+      Scenario: Two shouts
+        Given a person named Sean
+        And a person named Lucy
+        When Sean shouts "Free bagels!"
+        And Sean shouts "Free toast!"
+        Then Lucy hears the following messages:
+          | Free bagels! |
+          | Free toast!  |
