@@ -18,13 +18,19 @@ Feature: Hear shout
   Rule: Shouts should only be heard if listened within range
 
     Scenario: Listener is within range
-      Given a person named Sean is located at 0
-      And a person named Lucy is located at 50
+      Given the range is 100
+      And people are located at
+        | name | location |
+        | Sean | 0.       |
+        | Lucy | 50.      |
       When Sean shouts
       Then Lucy should hear Sean's message
 
     Scenario: Listener is out of range
-      Given a person named Sean is located at 0
-      And a person named Larry is located at 150
+      Given the range is 100
+      And people are located at
+        | name  | location |
+        | Sean  | 0.       |
+        | Larry | 150.     |
       When Sean shouts
       Then Larry should not hear Sean's message

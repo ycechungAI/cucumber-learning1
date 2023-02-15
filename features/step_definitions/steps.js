@@ -22,6 +22,12 @@ Given("a person named {word} is located at {int}", function (name, location) {
   this.people[name] = new Person(this.network, location);
 });
 
+Given("people are located at", function (dataTable) {
+  dataTable.hashes().forEach((person) => {
+    this.people[person.name] = new Person(this.network, person.location);
+  });
+});
+
 When("Sean shouts", function () {
   this.people["Sean"].shout("Hello, world");
   this.messageFromSean = "Hello, world";
