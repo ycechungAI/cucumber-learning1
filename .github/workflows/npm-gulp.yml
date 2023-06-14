@@ -26,6 +26,5 @@ jobs:
       run: |
         npm install gulp
         npm install
-        npm audit fix
         npm audit fix --force
         gulp
